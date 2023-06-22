@@ -13,17 +13,17 @@ if (!isset($_SESSION["user"]))
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../css/table.css">
-  <title>Użytkownicy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Class Grades</title>
 </head>
 <body>
-<h4>School Gradebook</h4>
-<table>
+<h4 class="welcome">Grades</h4>
+<table class="tableContainer">
   <tr>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Grades</th>
-    <th>Action</th>
+    <th class='tableHeaders'>Name</th>
+    <th class='tableHeaders'>Surname</th>
+    <th class='tableHeaders'>Grades</th>
+    <th class='tableHeaders'>Action</th>
   </tr>
 
 <?php
@@ -48,24 +48,27 @@ if (!isset($_SESSION["user"]))
     $sql = "SELECT * FROM grade g WHERE student_ID=$student_ID AND subject_ID='$subject_ID';";
     $result2 = $conn->query($sql);
     echo '<tr>';
-    echo '<td>' . $user['name'] . '</td>';
-    echo '<td>' . $user['surname'] . '</td>';
+    echo '<td class="tableElement">' . $user['name'] . '</td>';
+    echo '<td class="tableElement">' . $user['surname'] . '</td>';
     echo  '<td>';
     while($grade = $result2->fetch_assoc()){
-          echo "<a href='edit_grade.php?grade_ID=" .$grade['grade_ID']. "'>" . "$grade[grade]" . '</a>';
-          echo '<p>'."   ".'</p>';
+          echo "<button class='gradeBtn'><a href='edit_grade.php?grade_ID=" .$grade['grade_ID']. "'>" . "$grade[grade]" . '</a></button>';
     }
     echo '</td>';
-    echo "<td><a href='add_grade.php?student_ID=" . $user['student_ID'] . "'>" . "Add Grade" . '</a></td>';
+    echo "<td><button class='submitBtn'><a href='add_grade.php?student_ID=" . $user['student_ID'] . "'>" . "Add Grade" . '</a></button></td>';
     echo '</tr>';
   }
   echo "</table>";
 ?>
-<div class="container">
-        <a href="../scripts/logout.php" class="btn btn-warning">Logout</a>
+<div class="logoutContainer">
+  <button class="logoutBtn">
+        <a href="../scripts/logout.php">Logout</a>
+</button>
     </div>
-<div class="container">
-        <a href="teacher_index.php" class="btn btn-warning">Go Back</a>
+<div class="goBackContainer">
+  <button class="backBtn">
+        <a href="teacher_index.php">Go Back</a>
+</button>
     </div>
 </body>
 </html>

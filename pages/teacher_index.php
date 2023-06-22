@@ -13,17 +13,18 @@ if (!isset($_SESSION["user"]))
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../css/table.css">
-  <title>Użytkownicy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Teacher's control panel</title>
 </head>
 <body>
-<h4>School Gradebook</h4>
+<h4 class="welcome">Welcome to the teacher's control panel!</h4>
+<div class="tableContainer">
 <table>
   <tr>
-    <th>Subject</th>
-    <th>Class</th>
+    <th class="tableHeaders">Subject</th>
+    <th class="tableHeaders">Class</th>
   </tr>
-
+</div>
 <?php
   $email = $_SESSION["email"];
   require_once "../scripts/database.php";
@@ -32,16 +33,18 @@ if (!isset($_SESSION["user"]))
   while($user = $result->fetch_assoc()){
     echo <<< TABLEUSERS
       <tr>
-        <td>$user[subject_Name]</td>
-        <td><a href='class_grades.php?subject_ID=$user[subject_ID]'>$user[class_Name]</a></td>
+        <td class="tableElement">$user[subject_Name]</td>
+        <td><button class="submitBtn"><a href='class_grades.php?subject_ID=$user[subject_ID]'>$user[class_Name]</a></button></td>
       </tr>
       
 TABLEUSERS;
   }
   echo "</table>";
 ?>
-<div class="container">
-        <a href="../scripts/logout.php" class="btn btn-warning">Logout</a>
+<div class="logoutContainer">
+    <button class="logoutBtn">
+        <a href="../scripts/logout.php">Logout</a>
+    </button>
     </div>
 </body>
 </html>
